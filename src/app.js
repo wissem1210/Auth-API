@@ -1,6 +1,7 @@
 import express from 'express';
 import logger from 'morgan';
 import environment from './config/environment';
+import errorsMiddelware from './middelwares/errors';
 
 class App {
   constructor() {
@@ -13,7 +14,9 @@ class App {
     this.setRoutes();
   }
 
-  setRoutes() {}
+  setRoutes() {
+    this.app.use(errorsMiddelware);
+  }
 
   getrApp() {
     return this.app;

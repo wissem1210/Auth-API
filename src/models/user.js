@@ -27,27 +27,40 @@ export default (sequelize) => {
           isEmail: {
             msg: 'Not a valid email address',
           },
-        },
-        password: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-        username: {
-          type: DataTypes.STRING(50),
-          unique: true,
-        },
-        firstName: {
-          type: DataTypes.STRING(50),
-          validate: {
-            args: [0, 50],
-            msg: 'First name has too many characters',
+          notNull: {
+            msg: 'Email is required',
           },
         },
-        lastName: {
-          type: DataTypes.STRING(50),
-          validate: {
-            args: [0, 50],
-            msg: 'Last name has too many characters',
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      username: {
+        type: DataTypes.STRING(50),
+        unique: true,
+        validate: {
+          len: {
+            args: [2, 50],
+            msg: 'Username must contain between 2 and 50 characters',
+          },
+        },
+      },
+      firstName: {
+        type: DataTypes.STRING(50),
+        validate: {
+          len: {
+            args: [3, 50],
+            msg: 'First name must contain between 3 and 50 characters',
+          },
+        },
+      },
+      lastName: {
+        type: DataTypes.STRING(50),
+        validate: {
+          len: {
+            args: [3, 50],
+            msg: 'Last name must contain between 3 and 50 characters',
           },
         },
       },
