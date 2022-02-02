@@ -1,5 +1,3 @@
-import req from 'express/lib/request';
-import res from 'express/lib/response';
 import JWTUtils from '../utils/jwt-utils';
 
 function requiresAuth(tokenType = 'accessToken') {
