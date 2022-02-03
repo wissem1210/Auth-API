@@ -2,12 +2,13 @@ import JWTUtils from '../utils/jwt-utils';
 
 function requiresAuth(tokenType = 'accessToken') {
   return function (req, res, next) {
-    const authHeader = req.header.authorization;
-
+    const authHeader = req.headers.authorization;
     if (authHeader) {
       try {
         var [bearer, token] = authHeader.split(' ');
-        if (bearer.toLowerCase !== 'bearer' || !token) {
+        console.log(bearer);
+        console.log(token);
+        if (bearer !== 'Bearer' || !token) {
           throw Error;
         }
       } catch (err) {

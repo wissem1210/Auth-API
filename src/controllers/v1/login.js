@@ -10,7 +10,7 @@ router.post(
   '/login',
   runAsyncWrapper(async (req, res) => {
     const { email, password } = req.body;
-    const user = User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { email } });
 
     if (!user || !(await User.comparePasswords(password, user.password))) {
       return res
@@ -30,8 +30,8 @@ router.post(
       if (!savedRefreshToken) {
         await user.createRefreshToken({ token: refreshToken });
       } else {
-        user.RefreshToken.token = refreshToken;
-        await user.RefreshToken.save();
+        user.savedRefreshToken.token = refreshToken;
+        await user.savedRefreshToken.save();
       }
     } else {
       refreshToken = savedRefreshToken;

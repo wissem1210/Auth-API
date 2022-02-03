@@ -5,7 +5,8 @@ import environment from '../config/environment';
 export default (sequelize) => {
   class User extends Model {
     static associate(models) {
-      User.hasMany(models['Role']);
+      User.RefreshToken = User.hasOne(models.RefreshToken);
+      User.hasMany(models.Role);
     }
 
     static async hashPassword(password) {
@@ -13,6 +14,9 @@ export default (sequelize) => {
     }
 
     static async comparePasswords(password, hashedPassword) {
+      console.log(password);
+      console.log(hashedPassword);
+
       return bcrypt.compare(password, hashedPassword);
     }
   }

@@ -20,7 +20,7 @@ class App {
     this.app.use(errorsMiddelware);
   }
 
-  getrApp() {
+  getApp() {
     return this.app;
   }
 
